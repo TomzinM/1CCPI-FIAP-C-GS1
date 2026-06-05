@@ -81,7 +81,10 @@ int main(){
 
                 if (energia > 100 || energia < 0){
                     printf("Energia invalida.\n");
-                    energia = -1;
+                        tempPropulso = -1;
+                        tempHabit = -1;
+                        energia = -1;
+                        comms = -1;
                     break;
                 }
                 
@@ -90,9 +93,12 @@ int main(){
                 while ((ch = getchar()) != '\n' && ch != EOF);
 
                 if (comms != 0 && comms != 1){
-                    printf("Comunicacao invalida.");
-                    comms = -1;
-                    break;
+                    printf("Comunicacao invalida.\n");
+                        tempPropulso = -1;
+                        tempHabit = -1;
+                        energia = -1;
+                        comms = -1;                    
+                        break;
                 }
                 
                 printf("\033[0;33mData processada com sucesso\033[0m.\n");
@@ -345,18 +351,9 @@ int main(){
                     break;
                 }
 
-
-                if (energia < 20){
-                    printf("\x1b[30m(Energia < 20)\033[0m\n");
-                    printf("A sua energia parece estar bem baixa.\n");
-                    sleep(1.5);
-                    printf("Nao precisa se preocupar, e apenas preciso abrir os paineis solares para recarregar.\n");
-                    sleep(2);
-                    printf("Pode demorar um tempinho, entao... de uma coxilada.\n");
-                    break;
-                }
-
+                
                 if (comms == 0){
+                    printf("\x1b[30m(Comunicacoes == 0)\033[0m\n");
                     printf("Esquisito. Comunicacoes estao desligadas.\n");
                     sleep(2);
                     printf("Se nao for algo grande, resetar todos sistemas deve fazer voltar. Isso inclue eu, entao... te vejo em alguns segundos.\n");
@@ -381,8 +378,21 @@ int main(){
                         }
 
                     } while(resposta00006 != 'S' && resposta00006 != 's' && resposta00006 != 'N' && resposta00006 != 'n');
+                    break;                
+                }
+                
+                if (energia < 20){
+                    printf("\x1b[30m(Energia < 20)\033[0m\n");
+                    printf("A sua energia parece estar bem baixa.\n");
+                    sleep(1.5);
+                    printf("Nao precisa se preocupar, e apenas preciso abrir os paineis solares para recarregar.\n");
+                    sleep(2);
+                    printf("Pode demorar um tempinho, entao... de uma coxilada.\n");
                     break;
                 }
+
+
+                
                 printf("\033[0;33mZero\033[0m problemas!");
                 break;    
 
